@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project FAB — Home Automation Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0e0f0c;
+      --paper: #f5f3ee;
+      --accent: #c8a96e;
+      --accent-dark: #9a7d48;
+      --muted: #7a7870;
+      --border: #dedad3;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: flex-start; gap: 3rem;
+      padding: 1.25rem 4rem;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--ink);
+      font-size: 0.85rem; font-weight: 400; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; place-items: center;
+      padding: 8rem 4rem 5rem;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(200,169,110,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 70%, rgba(200,169,110,0.07) 0%, transparent 60%),
+        var(--paper);
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent-dark);
+      border: 1px solid var(--accent);
+      padding: 0.35rem 1rem; border-radius: 2rem;
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 1.1;
+      max-width: 800px; margin: 0 auto 1.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent-dark); }
+    .hero p {
+      font-size: 1.1rem; color: var(--muted); max-width: 520px;
+      margin: 0 auto 2.5rem; line-height: 1.8;
+      opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .hero-cta {
+      opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+    }
+    .btn {
+      display: inline-block; padding: 0.9rem 2.2rem;
+      background: var(--ink); color: var(--paper);
+      text-decoration: none; border-radius: 0.25rem;
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--ink);
+      border: 1px solid var(--border); margin-left: 1rem;
+    }
+    .btn-ghost:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 4rem; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent-dark);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.15; margin-bottom: 1.25rem;
+    }
+    .section-sub {
+      color: var(--muted); max-width: 520px;
+      font-size: 1rem; line-height: 1.8; margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .about-visual {
+      aspect-ratio: 1;
+      background:
+        linear-gradient(135deg, rgba(200,169,110,0.15) 0%, rgba(200,169,110,0.05) 100%);
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      display: grid; place-items: center;
+      font-size: 5rem;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--paper); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 2rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-3px); }
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .service-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem; margin-bottom: 0.6rem;
+    }
+    .service-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--ink); color: var(--paper); }
+    #how .section-label { color: var(--accent); }
+    #how .section-title { color: var(--paper); }
+    #how .section-sub { color: rgba(245,243,238,0.6); }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 1rem; }
+    .step { border-top: 2px solid var(--accent); padding-top: 1.5rem; }
+    .step-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem; color: var(--accent); line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .step h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--paper); }
+    .step p { font-size: 0.88rem; color: rgba(245,243,238,0.55); line-height: 1.7; }
+
+    /* ── PRIVACY ── */
+    #privacy { background: var(--white); }
+    .privacy-body {
+      background: var(--paper); border: 1px solid var(--border);
+      border-radius: 0.5rem; padding: 2.5rem;
+      font-size: 0.9rem; line-height: 1.85; color: #4a4845;
+    }
+    .privacy-body h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem; color: var(--ink);
+      margin: 1.75rem 0 0.5rem;
+    }
+    .privacy-body h3:first-child { margin-top: 0; }
+    .privacy-body ul { padding-left: 1.25rem; margin-top: 0.4rem; }
+    .privacy-body ul li { margin-bottom: 0.3rem; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--paper); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-detail { margin-bottom: 1.5rem; }
+    .contact-detail .label {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem;
+    }
+    .contact-detail p { font-size: 0.95rem; color: var(--ink); }
+    .contact-detail a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .contact-detail a:hover { border-color: var(--accent); }
+    .contact-note {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 0.5rem; padding: 2rem;
+    }
+    .contact-note h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem; margin-bottom: 0.75rem;
+    }
+    .contact-note p { color: var(--muted); font-size: 0.9rem; line-height: 1.75; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(245,243,238,0.45);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem;
+    }
+    footer .logo {
+      font-family: 'DM Serif Display', serif;
+      color: var(--paper); font-size: 1rem;
+    }
+    footer .logo span { color: var(--accent); }
+    footer nav a { color: rgba(245,243,238,0.8); text-decoration: none; margin-left: 1.5rem; }
+    footer nav a:hover { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .about-grid, .services-grid, .steps, .contact-grid { grid-template-columns: 1fr; }
+      .about-visual { display: none; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      footer nav { margin-top: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Project <span>FAB</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="terms.html">Terms</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Home Automation Services</div>
+    <h1>Your home, <em>intelligently</em> connected.</h1>
+    <p>Project FAB helps households streamline daily coordination — from scheduling and reminders to smart home communication — so families spend less time managing and more time living.</p>
+    <div class="hero-cta">
+      <a href="#services" class="btn">Our Services</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">Built for modern household management</h2>
+        <p class="section-sub">Project FAB is a home automation and coordination service designed to reduce the administrative overhead of running a household. We build and operate smart communication tools that keep families informed, organised, and connected — across the platforms they already use every day.</p>
+        <p style="color: var(--muted); font-size: 0.9rem; line-height: 1.8;">Our services are delivered on an opt-in basis to household members and authorised contacts only. We take privacy seriously and never engage with individuals who have not explicitly consented to receive communications from our systems.</p>
+      </div>
+      <div class="about-visual">🏡</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">Household automation, simplified</h2>
+    <p class="section-sub">From reminders to family scheduling, Project FAB handles the routine so you don't have to.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📅</div>
+        <h3>Scheduling & Reminders</h3>
+        <p>Automated reminders for appointments, tasks, and household events delivered to authorised household members on time.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💬</div>
+        <h3>Family Messaging Coordination</h3>
+        <p>Centralised messaging tools that relay information between household members via their preferred communication channels.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔔</div>
+        <h3>Smart Notifications</h3>
+        <p>Context-aware alerts for home events — from deliveries and maintenance schedules to grocery lists and bill reminders.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>Task Management</h3>
+        <p>Shared task lists and household chore coordination, kept updated and accessible from any device.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔒</div>
+        <h3>Privacy-First Design</h3>
+        <p>All communications are restricted to verified, opted-in household members. No data is shared with third parties.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <h3>Custom Automation</h3>
+        <p>Bespoke automation workflows designed around each household's specific routines, preferences, and schedules.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <p class="section-label">The Process</p>
+    <h2 class="section-title">Up and running in three steps</h2>
+    <p class="section-sub">Getting your household automated is straightforward. We handle the setup so you can focus on what matters.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Consultation</h3>
+        <p>We learn your household's communication needs, preferred tools, and daily routines to design the right automation workflow.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Setup & Opt-In</h3>
+        <p>All household members are onboarded individually with explicit consent. No one receives messages without agreeing to participate.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Ongoing Management</h3>
+        <p>Your automation runs quietly in the background. You can adjust, pause, or cancel any service at any time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">We'd love to hear from you</h2>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-detail">
+          <p class="label">Business Name</p>
+          <p>Project FAB</p>
+        </div>
+        <div class="contact-detail">
+          <p class="label">Email</p>
+          <p><a href="mailto:haprojectfab@gmail.com">haprojectfab@gmail.com</a></p>
+        </div>
+        <div class="contact-detail">
+          <p class="label">Service Area</p>
+          <p>Hong Kong</p>
+        </div>
+        <div class="contact-detail">
+          <p class="label">Business Hours</p>
+          <p>Monday – Friday, 9am – 6pm HKT</p>
+        </div>
+      </div>
+      <div class="contact-note">
+        <h3>A note on our service</h3>
+        <p>Project FAB operates on a household-by-household basis. All automation services are tailored to your specific needs and are delivered only to authorised, opted-in members of your household. We don't do mass messaging — every communication is intentional and consensual.</p>
+        <br/>
+        <p style="font-size:0.85rem;">To enquire about setting up an automation service for your home, email us directly and we'll arrange a brief consultation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Project <span>FAB</span></div>
+  <div style="font-size:0.78rem;">© 2026 Project FAB. All rights reserved.</div>
+  <nav>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</footer>
+
+</body>
+</html>

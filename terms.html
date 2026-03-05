@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms of Service — Project FAB</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0e0f0c; --paper: #f5f3ee; --accent: #c8a96e;
+      --accent-dark: #9a7d48; --muted: #7a7870; --border: #dedad3; --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-weight: 300; line-height: 1.7; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: flex-start; gap: 3rem;
+      padding: 1.25rem 4rem;
+      background: rgba(0,0,0,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--ink); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent-dark); }
+    .nav-links a.active { color: var(--accent-dark); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+    .page-hero {
+      padding: 10rem 4rem 4rem;
+      background:
+        radial-gradient(ellipse 50% 60% at 10% 60%, rgba(200,169,110,0.1) 0%, transparent 70%),
+        var(--paper);
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero .container { max-width: 760px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent-dark); }
+    .breadcrumb span { margin: 0 0.5rem; }
+    .page-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; margin-bottom: 1rem; }
+    .page-hero .meta { font-size: 0.85rem; color: var(--muted); }
+    .page-hero .meta strong { color: var(--accent-dark); }
+
+    .doc-body { padding: 5rem 4rem 6rem; }
+    .doc-body .container { max-width: 760px; margin: 0 auto; }
+
+    .toc {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 0.5rem; padding: 1.75rem 2rem;
+      margin-bottom: 3rem;
+    }
+    .toc h2 { font-family: 'DM Serif Display', serif; font-size: 1rem; margin-bottom: 1rem; color: var(--ink); }
+    .toc ol { padding-left: 1.2rem; }
+    .toc li { margin-bottom: 0.4rem; }
+    .toc a { color: var(--accent-dark); text-decoration: none; font-size: 0.88rem; }
+    .toc a:hover { text-decoration: underline; }
+
+    .doc-section { margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
+    .doc-section:last-child { border-bottom: none; }
+    .doc-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem; color: var(--ink);
+      margin-bottom: 1rem;
+      display: flex; align-items: baseline; gap: 0.75rem;
+    }
+    .doc-section h2 .num {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent-dark);
+      background: rgba(200,169,110,0.12); border: 1px solid rgba(200,169,110,0.3);
+      padding: 0.2rem 0.6rem; border-radius: 2rem; flex-shrink: 0;
+    }
+    .doc-section p { color: #4a4845; font-size: 0.92rem; line-height: 1.85; margin-bottom: 0.85rem; }
+    .doc-section ul, .doc-section ol { padding-left: 1.4rem; color: #4a4845; font-size: 0.92rem; line-height: 1.85; margin-bottom: 0.85rem; }
+    .doc-section li { margin-bottom: 0.4rem; }
+    .doc-section a { color: var(--accent-dark); }
+
+    .highlight-box {
+      background: rgba(200,169,110,0.08); border-left: 3px solid var(--accent);
+      border-radius: 0 0.4rem 0.4rem 0; padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0; font-size: 0.9rem; color: #4a4845;
+    }
+
+    footer {
+      background: var(--ink); color: rgba(245,243,238,0.45);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem;
+    }
+    footer .logo { font-family: 'DM Serif Display', serif; color: var(--paper); font-size: 1rem; }
+    footer .logo span { color: var(--accent); }
+    footer nav a { color: rgba(245,243,238,0.8); text-decoration: none; margin-left: 1.5rem; }
+    footer nav a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero, .doc-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      footer nav { margin-top: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Project <span>FAB</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="terms.html" class="active">Terms</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <p class="breadcrumb"><a href="index.html">Home</a> <span>›</span> Terms of Service</p>
+    <h1>Terms of Service</h1>
+    <p class="meta">Last updated: <strong>March 2026</strong> &nbsp;·&nbsp; Effective immediately upon publication</p>
+  </div>
+</div>
+
+<div class="doc-body">
+  <div class="container">
+
+    <div class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#s1">Acceptance of Terms</a></li>
+        <li><a href="#s2">Service Description</a></li>
+        <li><a href="#s3">Eligibility</a></li>
+        <li><a href="#s4">Acceptable Use</a></li>
+        <li><a href="#s5">Opt-In and Opt-Out</a></li>
+        <li><a href="#s6">WhatsApp and Third-Party Platforms</a></li>
+        <li><a href="#s7">Intellectual Property</a></li>
+        <li><a href="#s8">Disclaimer of Warranties</a></li>
+        <li><a href="#s9">Limitation of Liability</a></li>
+        <li><a href="#s10">Changes to Terms</a></li>
+        <li><a href="#s11">Contact</a></li>
+      </ol>
+    </div>
+
+    <div class="doc-section" id="s1">
+      <h2><span class="num">01</span> Acceptance of Terms</h2>
+      <p>By accessing or using any service provided by Project FAB, you agree to be bound by these Terms of Service and our <a href="privacy.html">Privacy Policy</a>. If you do not agree to these terms, please do not use our services.</p>
+      <p>These terms constitute a legally binding agreement between you and Project FAB.</p>
+    </div>
+
+    <div class="doc-section" id="s2">
+      <h2><span class="num">02</span> Service Description</h2>
+      <p>Project FAB provides home automation and household coordination tools, including but not limited to:</p>
+      <ul>
+        <li>Automated scheduling and reminder systems</li>
+        <li>Household messaging and notification coordination</li>
+        <li>Task and to-do list management</li>
+        <li>Custom automation workflows for domestic use</li>
+      </ul>
+      <p>Our services are designed for personal, non-commercial household use only. They are not intended for commercial resale, redistribution, or use by organisations.</p>
+    </div>
+
+    <div class="doc-section" id="s3">
+      <h2><span class="num">03</span> Eligibility</h2>
+      <p>To use Project FAB's services, you must be at least 18 years of age, or the age of majority in your jurisdiction. By using our services, you confirm that you meet this requirement.</p>
+      <p>Our services are available to household members who have been individually onboarded and have explicitly consented to participate.</p>
+    </div>
+
+    <div class="doc-section" id="s4">
+      <h2><span class="num">04</span> Acceptable Use</h2>
+      <p>You agree to use our services only for lawful household coordination purposes. You must not use our services to:</p>
+      <ul>
+        <li>Send unsolicited or spam communications to any person</li>
+        <li>Harass, threaten, or harm any individual</li>
+        <li>Violate any applicable local, national, or international law</li>
+        <li>Violate the terms of service of any third-party platform used in the delivery of our services (including WhatsApp and Meta platforms)</li>
+        <li>Attempt to circumvent or interfere with the operation of our systems</li>
+        <li>Use our services for any commercial or for-profit activity</li>
+      </ul>
+      <div class="highlight-box">
+        Project FAB reserves the right to suspend or terminate service to any user found to be in violation of these acceptable use requirements.
+      </div>
+    </div>
+
+    <div class="doc-section" id="s5">
+      <h2><span class="num">05</span> Opt-In and Opt-Out</h2>
+      <p>All communications sent through Project FAB systems are delivered exclusively to individuals who have explicitly opted in. Participation in our service is always voluntary.</p>
+      <p>Any recipient may opt out at any time by replying <strong>STOP</strong> to any message or by contacting us directly. Upon opting out, that individual will receive no further communications from our systems.</p>
+      <p>We maintain records of all opt-in consents and will provide these upon request.</p>
+    </div>
+
+    <div class="doc-section" id="s6">
+      <h2><span class="num">06</span> WhatsApp and Third-Party Platforms</h2>
+      <p>Where Project FAB uses WhatsApp as a communication channel, we do so in compliance with <a href="https://www.whatsapp.com/legal/business-policy/" target="_blank">WhatsApp's Business Policy</a> and Meta's platform terms.</p>
+      <p>By using our services, you acknowledge that communications may be delivered via WhatsApp or other third-party platforms, and that those platforms have their own terms of service and privacy policies which apply independently of ours.</p>
+      <p>Project FAB is not responsible for any changes, outages, or policy updates made by third-party platforms that may affect service delivery.</p>
+    </div>
+
+    <div class="doc-section" id="s7">
+      <h2><span class="num">07</span> Intellectual Property</h2>
+      <p>All content, design, software, and materials associated with the Project FAB service are the intellectual property of Project FAB. You may not copy, reproduce, or distribute any part of our service without prior written permission.</p>
+      <p>Content you provide to us (such as task lists or scheduling preferences) remains your property. You grant us a limited licence to use that content solely for the purpose of delivering our services to you.</p>
+    </div>
+
+    <div class="doc-section" id="s8">
+      <h2><span class="num">08</span> Disclaimer of Warranties</h2>
+      <p>Project FAB provides its services on an "as is" and "as available" basis. We make no warranties, express or implied, regarding the reliability, accuracy, or availability of our services.</p>
+      <p>We do not guarantee that our services will be uninterrupted, error-free, or that any particular message or notification will be delivered at any specific time.</p>
+    </div>
+
+    <div class="doc-section" id="s9">
+      <h2><span class="num">09</span> Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law, Project FAB shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, our services.</p>
+      <p>Our total liability for any claim arising out of or relating to these terms or our services shall not exceed the amount you have paid to us in the 12 months preceding the claim.</p>
+    </div>
+
+    <div class="doc-section" id="s10">
+      <h2><span class="num">10</span> Changes to Terms</h2>
+      <p>We may update these Terms of Service from time to time. When we do, we will update the "Last updated" date at the top of this page.</p>
+      <p>Continued use of our services after updated terms are posted constitutes your acceptance of those changes. If you do not agree to the revised terms, you should discontinue use of our services.</p>
+    </div>
+
+    <div class="doc-section" id="s11">
+      <h2><span class="num">11</span> Contact</h2>
+      <p>If you have any questions about these Terms of Service, please contact us at:</p>
+      <ul>
+        <li><strong>Business name:</strong> Project FAB</li>
+        <li><strong>Email:</strong> <a href="mailto:haprojectfab@gmail.com">haprojectfab@gmail.com</a> <em style="color:var(--muted); font-size:0.85rem;"></em></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="logo">Project <span>FAB</span></div>
+  <div style="font-size:0.78rem;">© 2026 Project FAB. All rights reserved.</div>
+  <nav>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — Project FAB</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0e0f0c; --paper: #f5f3ee; --accent: #c8a96e;
+      --accent-dark: #9a7d48; --muted: #7a7870; --border: #dedad3; --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-weight: 300; line-height: 1.7; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: flex-start; gap: 3rem;
+      padding: 1.25rem 4rem;
+      background: rgba(0,0,0,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--ink); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent-dark); }
+    .nav-links a.active { color: var(--accent-dark); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+    .page-hero {
+      padding: 10rem 4rem 4rem;
+      background:
+        radial-gradient(ellipse 50% 60% at 90% 30%, rgba(200,169,110,0.1) 0%, transparent 70%),
+        var(--paper);
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero .container { max-width: 760px; margin: 0 auto; }
+    .breadcrumb { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent-dark); }
+    .breadcrumb span { margin: 0 0.5rem; }
+    .page-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; margin-bottom: 1rem; }
+    .page-hero .meta { font-size: 0.85rem; color: var(--muted); }
+    .page-hero .meta strong { color: var(--accent-dark); }
+
+    .doc-body { padding: 5rem 4rem 6rem; }
+    .doc-body .container { max-width: 760px; margin: 0 auto; }
+
+    .toc {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 0.5rem; padding: 1.75rem 2rem;
+      margin-bottom: 3rem;
+    }
+    .toc h2 { font-family: 'DM Serif Display', serif; font-size: 1rem; margin-bottom: 1rem; color: var(--ink); }
+    .toc ol { padding-left: 1.2rem; }
+    .toc li { margin-bottom: 0.4rem; }
+    .toc a { color: var(--accent-dark); text-decoration: none; font-size: 0.88rem; }
+    .toc a:hover { text-decoration: underline; }
+
+    .doc-section { margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
+    .doc-section:last-child { border-bottom: none; }
+    .doc-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem; color: var(--ink);
+      margin-bottom: 1rem;
+      display: flex; align-items: baseline; gap: 0.75rem;
+    }
+    .doc-section h2 .num {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent-dark);
+      background: rgba(200,169,110,0.12); border: 1px solid rgba(200,169,110,0.3);
+      padding: 0.2rem 0.6rem; border-radius: 2rem; flex-shrink: 0;
+    }
+    .doc-section p { color: #4a4845; font-size: 0.92rem; line-height: 1.85; margin-bottom: 0.85rem; }
+    .doc-section ul, .doc-section ol { padding-left: 1.4rem; color: #4a4845; font-size: 0.92rem; line-height: 1.85; margin-bottom: 0.85rem; }
+    .doc-section li { margin-bottom: 0.4rem; }
+    .doc-section a { color: var(--accent-dark); }
+
+    .highlight-box {
+      background: rgba(200,169,110,0.08); border-left: 3px solid var(--accent);
+      border-radius: 0 0.4rem 0.4rem 0; padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0; font-size: 0.9rem; color: #4a4845;
+    }
+
+    footer {
+      background: var(--ink); color: rgba(245,243,238,0.45);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem;
+    }
+    footer .logo { font-family: 'DM Serif Display', serif; color: var(--paper); font-size: 1rem; }
+    footer .logo span { color: var(--accent); }
+    footer nav a { color: rgba(245,243,238,0.8); text-decoration: none; margin-left: 1.5rem; }
+    footer nav a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero, .doc-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      footer nav { margin-top: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Project <span>FAB</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="privacy.html" class="active">Privacy</a></li>
+    <li><a href="terms.html">Terms</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <p class="breadcrumb"><a href="index.html">Home</a> <span>›</span> Privacy Policy</p>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated: <strong>March 2026</strong> &nbsp;·&nbsp; Effective immediately upon publication</p>
+  </div>
+</div>
+
+<div class="doc-body">
+  <div class="container">
+
+    <div class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#s1">Who We Are</a></li>
+        <li><a href="#s2">What Information We Collect</a></li>
+        <li><a href="#s3">How We Use Your Information</a></li>
+        <li><a href="#s4">Who We Share Data With</a></li>
+        <li><a href="#s5">Messaging and WhatsApp Communications</a></li>
+        <li><a href="#s6">Data Retention</a></li>
+        <li><a href="#s7">Your Rights</a></li>
+        <li><a href="#s8">Cookies and Tracking</a></li>
+        <li><a href="#s9">Changes to This Policy</a></li>
+        <li><a href="#s10">Contact Us</a></li>
+      </ol>
+    </div>
+
+    <div class="doc-section" id="s1">
+      <h2><span class="num">01</span> Who We Are</h2>
+      <p>Project FAB ("we", "our", "us") is a home automation and household coordination service. We build and operate smart communication tools that help households stay organised and connected.</p>
+      <p>Our registered business name is <strong>Project FAB</strong>. For all privacy-related enquiries, please contact us using the details in Section 10 of this policy.</p>
+    </div>
+
+    <div class="doc-section" id="s2">
+      <h2><span class="num">02</span> What Information We Collect</h2>
+      <p>We collect only the minimum information necessary to provide our services. This may include:</p>
+      <ul>
+        <li><strong>Contact details</strong> — name, phone number, and email address of authorised household members who have explicitly opted in to our service.</li>
+        <li><strong>Household preferences</strong> — scheduling data, task lists, reminders, and other information you provide to configure your automation workflows.</li>
+        <li><strong>Communication logs</strong> — records of messages exchanged between our systems and opted-in users, retained solely for the purpose of service delivery and troubleshooting.</li>
+      </ul>
+      <div class="highlight-box">
+        We do not collect sensitive personal data such as financial information, health records, or government identification. We do not collect data from anyone who has not explicitly opted in.
+      </div>
+    </div>
+
+    <div class="doc-section" id="s3">
+      <h2><span class="num">03</span> How We Use Your Information</h2>
+      <p>Information collected is used exclusively to:</p>
+      <ul>
+        <li>Deliver the automation and coordination services you have requested</li>
+        <li>Send reminders, notifications, and messages to opted-in household members only</li>
+        <li>Improve the reliability, accuracy, and relevance of our service</li>
+        <li>Respond to your support or privacy requests</li>
+      </ul>
+      <p>We do not use your data for advertising, profiling, or marketing to third parties. We do not use your data for any purpose beyond the direct delivery of the services you have subscribed to.</p>
+    </div>
+
+    <div class="doc-section" id="s4">
+      <h2><span class="num">04</span> Who We Share Data With</h2>
+      <p>We do not sell, rent, or share your personal data with any third parties for commercial purposes.</p>
+      <p>Data may be processed by trusted infrastructure providers (such as cloud hosting or messaging platforms) solely to operate our systems. These providers are bound by strict confidentiality agreements and are not permitted to use your data for their own purposes.</p>
+      <p>We may disclose data if required to do so by law or a valid legal process, and only to the extent necessary to comply.</p>
+    </div>
+
+    <div class="doc-section" id="s5">
+      <h2><span class="num">05</span> Messaging and WhatsApp Communications</h2>
+      <p>Where our services use WhatsApp as a delivery channel, we operate in full compliance with <a href="https://www.whatsapp.com/legal/business-policy/" target="_blank">WhatsApp's Business Policy</a> and Meta's Terms of Service.</p>
+      <div class="highlight-box">
+        <strong>Opt-in guarantee:</strong> All recipients of WhatsApp messages from Project FAB have explicitly consented to receive those messages. We never send unsolicited messages.
+      </div>
+      <p>You may opt out of receiving WhatsApp communications from us at any time by:</p>
+      <ul>
+        <li>Replying <strong>STOP</strong> to any message you receive from us</li>
+        <li>Contacting us directly at the email address in Section 10</li>
+      </ul>
+      <p>Upon opting out, you will receive no further messages. Any data associated with your number will be removed from our active systems within 30 days.</p>
+    </div>
+
+    <div class="doc-section" id="s6">
+      <h2><span class="num">06</span> Data Retention</h2>
+      <p>We retain personal data only for as long as is necessary to deliver the services you have subscribed to. Specifically:</p>
+      <ul>
+        <li>Active service data is retained for the duration of your subscription</li>
+        <li>Communication logs are retained for up to 90 days for troubleshooting purposes, then deleted</li>
+        <li>Upon cancellation or opt-out, all personal data is deleted within 30 days upon request</li>
+      </ul>
+    </div>
+
+    <div class="doc-section" id="s7">
+      <h2><span class="num">07</span> Your Rights</h2>
+      <p>You have the following rights with respect to your personal data:</p>
+      <ul>
+        <li><strong>Right of access</strong> — you may request a copy of the data we hold about you</li>
+        <li><strong>Right to rectification</strong> — you may ask us to correct inaccurate data</li>
+        <li><strong>Right to erasure</strong> — you may ask us to delete your data at any time</li>
+        <li><strong>Right to opt out</strong> — you may withdraw consent for communications at any time</li>
+      </ul>
+      <p>To exercise any of these rights, please contact us using the details in Section 10. We will respond within 30 days.</p>
+    </div>
+
+    <div class="doc-section" id="s8">
+      <h2><span class="num">08</span> Cookies and Tracking</h2>
+      <p>This website uses no advertising cookies and no third-party tracking scripts. We do not use cookies to identify or profile visitors.</p>
+      <p>Standard web server logs (IP address, browser type, pages visited) may be recorded automatically by our hosting provider (GitHub Pages) for security and operational purposes. These logs are not used by Project FAB for any analytical or commercial purpose.</p>
+    </div>
+
+    <div class="doc-section" id="s9">
+      <h2><span class="num">09</span> Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time to reflect changes in our services or legal obligations. When we do, we will update the "Last updated" date at the top of this page.</p>
+      <p>We encourage you to review this policy periodically. Continued use of our services after changes are posted constitutes your acceptance of the updated policy.</p>
+    </div>
+
+    <div class="doc-section" id="s10">
+      <h2><span class="num">10</span> Contact Us</h2>
+      <p>For any privacy-related questions, requests, or complaints, please contact us at:</p>
+      <ul>
+        <li><strong>Business name:</strong> Project FAB</li>
+        <li><strong>Email:</strong> <a href="mailto:haprojectfab@gmail.com">haprojectfab@gmail.com</a> <em style="color:var(--muted); font-size:0.85rem;"></em></li>
+      </ul>
+      <p>We aim to respond to all privacy requests within 30 days.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="logo">Project <span>FAB</s</span></div>
+  <div style="font-size:0.78rem;">© 2026 Project FAB. All rights reserved.</div>
+  <nav>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</footer>
+
+</body>
+</html>
